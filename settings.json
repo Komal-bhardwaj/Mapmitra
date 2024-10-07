@@ -1,0 +1,28 @@
+{
+    "[jsonc]": {
+        "breadcrumbs.showBooleans": true,
+        "breadcrumbs.showEnums": true,
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "workbench.editorAssociations": {
+        "*.vsix": "default"
+    },
+    "editor.largeFileOptimizations": false,
+    "grunt.autoDetect": "on",
+    "gulp.autoDetect": "on",
+    "prolead.runTime.timesActivated": 237,
+    "prolead.templates.configFile": "c:\\Users\\komal\\.vscode\\extensions\\chairimpsec.prolead-1.2.8/templates/config.set",
+    "prolead.templates.designFile": "c:\\Users\\komal\\.vscode\\extensions\\chairimpsec.prolead-1.2.8/templates/design.v",
+    "prolead.templates.libraryFile": "c:\\Users\\komal\\.vscode\\extensions\\chairimpsec.prolead-1.2.8/templates/library.lib",
+    "prolead.templates.linkerFile": "c:\\Users\\komal\\.vscode\\extensions\\chairimpsec.prolead-1.2.8/templates/linker.ld",
+    "prolead.runTime.welcomePage": false
+}
+
+  
+  
