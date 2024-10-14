@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charity Donation Platform</title>
+
+    <!-- Add Leaflet CSS for map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+    <!-- Add Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+
+
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Styles for buttons and page -->
+    <style>
+        /* Centering the Share Location button */
+        #donate {
+            display: flex;
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
+            flex-direction: column; /* Stack elements vertically */
+            height: 100vh; /* Full height of the viewport */
+        }
+
+        .btn-secondary {
+            margin: 10px; /* Space around the button */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; 
+            color: #333; 
+        }
+
+        header {
+            background-color: #343a40;
+            padding: 10px;
+            color: white;
+        }
+
+        nav .nav-links {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav .nav-links li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+
+        .banner {
+            text-align: center;
+            padding: 50px 0;
+            background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner h1 {
+            margin-bottom: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .banner p {
+            font-size: 20px;
+            font-weight: 400;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .section.bg-light {
+            background-color: #f8f9fa;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: lightseagreen;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 50px;
+            height: 5px;
+            background-color: #333;
+            display: block;
+            margin: 10px auto;
+        }
+
+        /* Text Styling */
+        .section-text {
+            font-size: 1.2rem;
+            color: #666;
+            animation: fadeInUp 1s ease-in-out 0.5s;
+        }
+
+        /* Steps Section */
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+
+        .step {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 30%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-in-out 0.5s;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .step h3 {
+            font-size: 1.8rem;
+            color: blueviolet;
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Step Icons */
+        .icon {
+            width: 60px;
+            height: 60px;
+            background-color: #f76c6c;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+            animation: bounce 2s infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-15px);
+            }
+            60% {
+                transform: translateY(-7px);
+            }
+        }
+
+        /* Button styling */
+        .btn-primary, .btn-secondary, .btn-map, .btn-route {
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            border: none;
+            transition: background-color 0.4s ease, transform 0.4s ease;
+        }
+
+        .btn-primary {
+            background-color: #28a745;
+        }
+
+        .btn-primary:hover {
+            background-color: #218838;
+            transform: scale(1.1);
+        }
+
+        .btn-secondary {
+            background-color: #007bff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .btn-map {
+            background-color: #ffc107;
+        }
+
+        .btn-map:hover {
+            background-color: #e0a800;
+            transform: scale(1.1);
+        }
+
+        .btn-route {
+            background-color: #ff5733;
+        }
+
+        .btn-route:hover {
+            background-color: #ff4519;
+            transform: scale(1.1);
+        }
+
+        .donation-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #f8f9fa;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        #map, #map-food, #map-books, #route-map {
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #343a40;
+            color: white;
+        }
+
+        .ngo-list {
+            margin-top: 20px;
+        }
+
+        .ngo-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .ngo-list ul li {
+            margin: 5px 0;
+        }
+
+        .ngo-list ul li strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Home Section -->
+    <section id="home">
+        <div class="banner">
+            <h1>Make a Difference with One Step</h1>
+            <p>Donate what you don't need, help someone in need.</p>
+            <a href="#donate" class="btn-primary">Donate Now</a>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <p class="section-text">
+                We connect generous donors with people and NGOs in need of essential items.
+                Join us to help make the world a better place, one donation at a time.
+            </p>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="icon">1</div>
+                    <h3>Step 1</h3>
+                    <p>Search for nearby NGOs or receivers based on their needs and your location.</p>
+                </div>
+                <div class="step">
+                    <div class="icon">2</div>
+                    <h3>Step 2</h3>
+                    <p>Select the items you wish to donate from your profile or inventory.</p>
+                </div>
+                <div class="step">
+                    <div class="icon">3</div>
+                    <h3>Step 3</h3>
+                    <p>Deliver or schedule a pickup and make an impact today!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section with Maps and Pathfinding -->
+    <section id="donate" class="section">
+        <div class="container" id="donate">
+            <h2>Make a Donation</h2>
+
+            <!-- Centered Share Location Button -->
+            <button class="btn-secondary" onclick="shareLocation()">Share My Location</button>
+
+
+    
+
+            
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Donation Cards -->
+            <div class="donation-cards">
+                <!-- Donate Clothes -->
+                <div class="card">
+                    <h3>Donate Clothes</h3>
+                    <p>Find receivers who need clothing donations in your area.</p>
+                    <a href="#" class="btn-secondary" onclick="findReceiver()">Find Receivers</a>
+                    <div id="map"></div>
+                </div>
+
+                <!-- Donate Food -->
+                <div class="card">
+                    <h3>Donate Food</h3>
+                    <p>Help provide food for those in need within your community.</p>
+                    <a href="#" class="btn-secondary" onclick="findFoodReceiver()">Find Receivers</a>
+                    <div id="map-food"></div>
+                </div>
+
+                <!-- Donate Books -->
+                <div class="card">
+                    <h3>Donate Books</h3>
+                    <p>Help provide books to children in need of education support.</p>
+                    <a href="#" class="btn-secondary" onclick="findBookReceiver()">Find Receivers</a>
+                    <div id="map-books"></div>
+                </div>
+            </div>
+
+
+
+
+
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Find Path Button -->
+            <div class="ngo-list">
+                <button class="btn-route" onclick="findPath()">Find Path to Nearby NGOs</button>
+                <div id="route-map"></div>
+
+                <ul>
+                    <li><strong>Salaam Baalak Trust</strong> – Provides shelter, education, and healthcare to street children. Location: Gurugram.</li>
+                    <li><strong>Goonj</strong> – Focuses on clothing and material donations to urban and rural communities. Location: Delhi.</li>
+                    <li><strong>Child Rights and You (CRY)</strong> – Works towards child rights and education. Location: Noida.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Charity Donation Platform. All rights reserved.</p>
+    </footer>
+
+    <!-- Add Leaflet JS for map -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
+    <!-- Add Leaflet Routing Machine JS -->
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+    <script>
+        // Share My Location Function
+        function shareLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Function to show the position on the map
+        function showPosition(position) {
+            const userLocation = [position.coords.latitude, position.coords.longitude];
+            
+            // Center the map to the user's location
+            const map = initMap('map'); // Initialize the map
+            map.setView(userLocation, 12); // Set the view to user's location
+            
+            L.marker(userLocation).addTo(map).bindPopup("You are here!").openPopup();
+        }
+
+        // Function to handle errors
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        // Sample receiver data for Clothes
+        const clothReceiverData = [
+            { name: "Clothes Receiver 1", latitude: 28.6139, longitude: 77.2090 },
+            { name: "Clothes Receiver 2", latitude: 28.6448, longitude: 77.2178 },
+            { name: "Clothes Receiver 3", latitude: 28.6010, longitude: 77.2331 }
+        ];
+
+        // Sample receiver data for Food
+        const foodReceiverData = [
+            { name: "Food Receiver 1", latitude: 28.6139, longitude: 77.2090 },
+            { name: "Food Receiver 2", latitude: 28.6448, longitude: 77.2178 },
+            { name: "Food Receiver 3", latitude: 28.6010, longitude: 77.2331 }
+        ];
+
+        // Sample receiver data for Book Donation
+        const bookReceiverData = [
+            { name: "Book Receiver 1", latitude: 28.4539, longitude: 77.0355 },
+            { name: "Book Receiver 2", latitude: 28.4564, longitude: 77.0330 },
+            { name: "Book Receiver 3", latitude: 28.4665, longitude: 77.0445 }
+        ];
+
+        // Initialize Map
+        function initMap(mapId) {
+            const map = L.map(mapId).setView([28.6139, 77.2090], 12); // Set to a central location
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            return map;
+        }
+
+        // Find Receiver for Clothes
+        function findReceiver() {
+            const map = initMap('map');
+            clothReceiverData.forEach(receiver => {
+                L.marker([receiver.latitude, receiver.longitude]).addTo(map)
+                    .bindPopup(receiver.name);
+            });
+        }
+
+        // Find Receiver for Food
+        function findFoodReceiver() {
+            const map = initMap('map-food');
+            foodReceiverData.forEach(receiver => {
+                L.marker([receiver.latitude, receiver.longitude]).addTo(map)
+                    .bindPopup(receiver.name);
+            });
+        }
+
+        // Find Receiver for Books
+        function findBookReceiver() {
+            const map = initMap('map-books');
+            bookReceiverData.forEach(receiver => {
+                L.marker([receiver.latitude, receiver.longitude]).addTo(map)
+                    .bindPopup(receiver.name);
+            });
+        }
+
+        // Find Path to Nearby NGOs
+        function findPath() {
+            const routeMap = initMap('route-map');
+            const start = [28.6139, 77.2090]; // Start point (can be the user's location)
+            const end = [28.6375, 77.2245]; // End point (example location of an NGO)
+
+            const carIcon = L.icon({
+                iconUrl: 'https://i.imgur.com/4jTjGrU.png', // Car icon URL
+                iconSize: [40, 40],
+                iconAnchor: [20, 20],
+            });
+
+            const carMarker = L.marker(start, { icon: carIcon }).addTo(routeMap);
+
+            const routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(start[0], start[1]),
+                    L.latLng(end[0], end[1])
+                ],
+                routeWhileDragging: true,
+                createMarker: function() { return null; } // Disable markers
+            }).addTo(routeMap);
+
+            routingControl.on('routesfound', function(e) {
+                const routes = e.routes;
+                const route = routes[0];
+                const latLngs = route.coordinates;
+
+                animateCar(latLngs, carMarker);
+            });
+        }
+
+        // Function to animate the car along the route
+        function animateCar(latLngs, marker) {
+            let index = 0;
+            const speed = 200; // Speed of car movement in ms per step
+
+            function moveCar() {
+                if (index < latLngs.length) {
+                    const point = latLngs[index];
+                    marker.setLatLng([point.lat, point.lng]);
+                    index++;
+                    setTimeout(moveCar, speed);
+                }
+            }
+
+            moveCar(); // Start moving the car
+        }
+    </script>
+</body>
+</html>
