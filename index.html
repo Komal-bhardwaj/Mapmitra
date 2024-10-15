@@ -3,531 +3,430 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Charity Donation Platform</title>
-
-    <!-- Add Leaflet CSS for map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    
-    <!-- Add Leaflet Routing Machine CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
-
-    <!-- Styles for buttons and page -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff; /* Light color background */
-            color: #333; /* Text color for better readability */
-        }
-
-        header {
-            background-color: #343a40;
-            padding: 10px;
-            color: white;
-        }
-
-        nav .nav-links {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        nav .nav-links li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        nav .nav-links a {
-            color: white;
-            text-decoration: none;
-        }
-
-        section {
-            padding: 40px 0;
-        }
-
-        .container {
-            width: 80%;
-            margin: auto;
-        }
-
-        .banner {
-            text-align: center;
-            padding: 50px 0;
-            background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%); /* Beautiful gradient */
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-        }
-
-        .banner h1 {
-            margin-bottom: 20px;
-            font-size: 36px;
-            font-weight: bold;
-            color: white; /* White text for contrast */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
-        }
-
-        .banner p {
-            font-size: 20px;
-            font-weight: 400;
-            color: white; /* White text for contrast */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
-        }
+    <title>Main Project Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="photos/image.png">
+</head>
 
 
 
+<style>
 /* General Styles */
 body {
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.6;
-    color: #333;
+    background-color:rgb(227, 242, 251);
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+}
+
+h1, h2 {
+    font-weight: bold;
 }
 
 .container {
-    width: 80%;
-    margin: 0 auto;
+    margin-top: 50px;
+}
+
+label {
+    font-weight: 600;
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
     padding: 20px;
-}
-
-/* Section Styles */
-.section {
-    padding: 80px 0;
-    text-align: center;
-}
-
-.section.bg-light {
-    background-color: #f8f9fa;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    color: lightseagreen; /* Vibrant Color */
-    text-transform: uppercase;
-    margin-bottom: 30px;
-    position: relative;
-    display: inline-block;
-    animation: fadeInUp 1s ease-in-out;
-}
-
-.section-title::after {
-    content: '';
-    width: 50px;
-    height: 5px;
-    background-color: #333;
-    display: block;
-    margin: 10px auto;
-}
-
-/* Text Styling */
-.section-text {
-    font-size: 1.2rem;
-    color: #666;
-    animation: fadeInUp 1s ease-in-out 0.5s;
-}
-
-/* Steps Section */
-.steps {
-    display: flex;
-    justify-content: space-around;
     margin-top: 40px;
 }
 
-.step {
-    background-color: #ffffff;
+/* Form Styles */
+form {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 30px;
     border-radius: 10px;
-    padding: 20px;
-    width: 30%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 1s ease-in-out 0.5s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.step:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+button {
+    font-weight: 600;
 }
 
-.step h3 {
-    font-size: 1.8rem;
-    color: blueviolet;
-    margin-bottom: 15px;
+button.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
-.step p {
+button.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+select.form-select {
+    border-radius: 5px;
+    padding: 8px;
     font-size: 1rem;
-    color: #333;
 }
 
-/* Step Icons */
-.icon {
-    width: 60px;
-    height: 60px;
-    background-color: #f76c6c;
-    color: #fff;
-    border-radius: 50%;
+/* Form Validation */
+input:invalid, select:invalid {
+    border-color: red;
+}
+
+input:valid, select:valid {
+    border-color: #28a745;
+}
+
+/* Card Style for Displaying Reviews/Requests */
+.review-card, .request-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.review-card:hover, .request-card:hover {
+    transform: scale(1.02);
+}
+
+.review-card h4, .request-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.review-card p, .request-card p {
+    font-size: 1rem;
+}
+
+.delete-btn {
+    margin-top: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 20px;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
-    margin: 0 auto 20px;
-    animation: bounce 2s infinite;
+    z-index: 9999;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-15px);
-    }
-    60% {
-        transform: translateY(-7px);
-    }
+.modal-body {
+    text-align: center;
 }
+</style>
 
 
-        /* Button styling */
-        .btn-primary, .btn-secondary, .btn-map, .btn-route {
-            padding: 15px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-            display: inline-block;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            color: white;
-            border: none;
-            transition: background-color 0.4s ease, transform 0.4s ease;
-        }
-
-        .btn-primary {
-            background-color: #28a745;
-        }
-
-        .btn-primary:hover {
-            background-color: #218838;
-            transform: scale(1.1);
-        }
-
-        .btn-secondary {
-            background-color: #007bff;
-        }
-
-        .btn-secondary:hover {
-            background-color: #0056b3;
-            transform: scale(1.1);
-        }
-
-        .btn-map {
-            background-color: #ffc107;
-        }
-
-        .btn-map:hover {
-            background-color: #e0a800;
-            transform: scale(1.1);
-        }
-
-        .btn-route {
-            background-color: #ff5733;
-        }
-
-        .btn-route:hover {
-            background-color: #ff4519;
-            transform: scale(1.1);
-        }
-
-        .donation-cards {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .card {
-            background-color: #f8f9fa;
-            padding: 20px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        #map, #map-food, #map-books, #route-map {
-            height: 400px;
-            margin-top: 20px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #343a40;
-            color: white;
-        }
-
-        .ngo-list {
-            margin-top: 20px;
-        }
-
-        .ngo-list ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .ngo-list ul li {
-            margin: 5px 0;
-        }
-
-        .ngo-list ul li strong {
-            font-weight: bold;
-        }
-    </style>
-</head>
 
 <body>
-    <!-- Header Section -->
-    <header>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#donate">Donate</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+    <header class="text-center bg-dark text-white py-3">
+        <h1 class="display-4">SANKALP</h1>
+        <p class="lead">Please fill out the form below to let us know what you need</p>
     </header>
 
-    <!-- Home Section -->
-    <section id="home">
-        <div class="banner">
-            <h1>Make a Difference with One Step</h1>
-            <p>Donate what you don't need, help someone in need.</p>
-            <a href="#donate" class="btn-primary">Donate Now</a>
-        </div>
-    </section>
-
-
-
-
-<!-- About Us Section -->
-<section id="about" class="section">
-    <div class="container">
-        <h2 class="section-title">About Us</h2>
-        <p class="section-text">
-            We connect generous donors with people and NGOs in need of essential items. 
-            Join us to help make the world a better place, one donation at a time.
-        </p>
-    </div>
-</section>
-
-<!-- How It Works Section -->
-<section id="how-it-works" class="section bg-light">
-    <div class="container">
-        <h2 class="section-title">How It Works</h2>
-        <div class="steps">
-            <div class="step">
-                <div class="icon">1</div>
-                <h3>Step 1</h3>
-                <p>Search for nearby NGOs or receivers based on their needs and your location.</p>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h2 class="mb-4 text-center">Submit Your Request</h2>
+                <form id="requestForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Your Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="Enter your location" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="requestType" class="form-label">What do you want to get?</label>
+                        <select class="form-select" id="requestType" required>
+                            <option value="">Select an option</option>
+                            <option value="Food">Food</option>
+                            <option value="Clothes">Clothes</option>
+                            <option value="Books">Books</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fileUpload" class="form-label">Choose a File</label>
+                        <input type="file" class="form-control" id="fileUpload" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="walletAddress" class="form-label">MetaMask Wallet Address</label>
+                        <input type="text" class="form-control" id="walletAddress" placeholder="Enter your MetaMask Wallet Address" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                </form>
+                <button id="requestToggleBtn" class="btn btn-secondary mt-4" style="display: none;">Want to Make Another Request?</button>
             </div>
-            <div class="step">
-                <div class="icon">2</div>
-                <h3>Step 2</h3>
-                <p>Select the items you wish to donate from your profile or inventory.</p>
-            </div>
-            <div class="step">
-                <div class="icon">3</div>
-                <h3>Step 3</h3>
-                <p>Deliver or schedule a pickup and make an impact today!</p>
+
+            <div class="col-lg-6" id="requestSection" style="display: none;">
+                <h2 class="mb-4">Past Requests</h2>
+                <div id="requestList">
+                    <!-- Requests will be displayed here dynamically -->
+                </div>
             </div>
         </div>
     </div>
-</section>
 
-
-
-    <!-- Donation Section with Maps and Pathfinding -->
-    <section id="donate" class="section">
-        <div class="container">
-            <h2>Make a Donation</h2>
-
-            <!-- Donation Cards -->
-            <div class="donation-cards">
-
-                <!-- Donate Clothes -->
-                <div class="card">
-                    <h3>Donate Clothes</h3>
-                    <p>Find receivers who need clothing donations in your area.</p>
-                    <a href="#" class="btn-secondary" onclick="findReceiver()">Find Receivers</a>
-                    <div id="map"></div>
-                </div>
-
-                <!-- Donate Food -->
-                <div class="card">
-                    <h3>Donate Food</h3>
-                    <p>Help provide food for those in need within your community.</p>
-                    <a href="#" class="btn-secondary" onclick="findFoodReceiver()">Find Receivers</a>
-                    <div id="map-food"></div>
-                </div>
-
-                <!-- Donate Books -->
-                <div class="card">
-                    <h3>Donate Books</h3>
-                    <p>Help provide books to children in need of education support.</p>
-                    <a href="#" class="btn-secondary" onclick="findBookReceiver()">Find Receivers</a>
-                    <div id="map-books"></div>
-                </div>
-
-            </div>
-
-            <!-- Find Path Button -->
-            <div class="ngo-list">
-                <button class="btn-route" onclick="findPath()">Find Path to Nearby NGOs</button>
-                <div id="route-map"></div>
-
-                <ul>
-                    <li><strong>Salaam Baalak Trust</strong> – Provides shelter, education, and healthcare to street children. Location: Gurugram.</li>
-                    <li><strong>Goonj</strong> – Focuses on clothing and material donations to urban and rural communities. Location: Delhi.</li>
-                    <li><strong>Child Rights and You (CRY)</strong> – Works towards child rights and education. Location: Noida.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2024 Charity Donation Platform. All rights reserved.</p>
+    <footer class="text-center text-white bg-dark py-4 mt-5">
+        <p>&copy; 2024 Your Name. All Rights Reserved.</p>
     </footer>
 
-    <!-- Add Leaflet JS for map -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    
-    <!-- Add Leaflet Routing Machine JS -->
-    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-
     <script>
-        // Sample receiver data for Clothes
-        const clothReceiverData = [
-            { name: "Clothes Receiver 1", latitude: 28.6139, longitude: 77.2090 },
-            { name: "Clothes Receiver 2", latitude: 28.6448, longitude: 77.2178 },
-            { name: "Clothes Receiver 3", latitude: 28.6010, longitude: 77.2331 }
-        ];
+        document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('requestForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        console.log("Form submitted");
 
-        // Sample receiver data for Food
-        const foodReceiverData = [
-            { name: "Food Receiver 1", latitude: 28.6139, longitude: 77.2090 },
-            { name: "Food Receiver 2", latitude: 28.6448, longitude: 77.2178 },
-            { name: "Food Receiver 3", latitude: 28.6010, longitude: 77.2331 }
-        ];
+        // Get form values
+        const name = document.getElementById('name').value.trim();
+        const location = document.getElementById('location').value.trim();
+        const requestType = document.getElementById('requestType').value.trim();
+        const walletAddress = document.getElementById('walletAddress').value.trim();
+        const fileInput = document.getElementById('fileUpload');
 
-        // Sample receiver data for Book Donation
-        const bookReceiverData = [
-            { name: "Book Receiver 1", latitude: 28.4539, longitude: 77.0355 },
-            { name: "Book Receiver 2", latitude: 28.4564, longitude: 77.0330 },
-            { name: "Book Receiver 3", latitude: 28.4665, longitude: 77.0445 }
-        ];
-
-        // Initialize Map
-        function initMap(mapId) {
-            const map = L.map(mapId).setView([28.6139, 77.2090], 12); // Set to a central location
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-            return map;
+        if (!fileInput.files.length) {
+            console.error("No file selected");
+            alert("Please select a file to upload.");
+            return;
         }
 
-        // Find Receiver for Clothes
-        function findReceiver() {
-            const map = initMap('map');
-            clothReceiverData.forEach(receiver => {
-                L.marker([receiver.latitude, receiver.longitude]).addTo(map)
-                    .bindPopup(receiver.name);
-            });
-        }
+        const file = fileInput.files[0];
+        const formData = new FormData();
 
-        // Find Receiver for Food
-        function findFoodReceiver() {
-            const map = initMap('map-food');
-            foodReceiverData.forEach(receiver => {
-                L.marker([receiver.latitude, receiver.longitude]).addTo(map)
-                    .bindPopup(receiver.name);
-            });
-        }
+        // Append the file to FormData
+        formData.append('file', file);
 
-        // Find Receiver for Books
-        function findBookReceiver() {
-            const map = initMap('map-books');
-            bookReceiverData.forEach(receiver => {
-                L.marker([receiver.latitude, receiver.longitude]).addTo(map)
-                    .bindPopup(receiver.name);
-            });
-        }
+        // Pinata API endpoint for pinning files
+        const pinFileUrl = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
 
-        // Find Path to Nearby NGOs
-        function findPath() {
-            const routeMap = initMap('route-map');
-            const start = [28.6139, 77.2090]; // Start point (can be the user's location)
-            const end = [28.6375, 77.2245]; // End point (example location of an NGO)
-
-            const carIcon = L.icon({
-                iconUrl: 'https://i.imgur.com/4jTjGrU.png', // Car icon URL
-                iconSize: [40, 40], // Size of the icon
-                iconAnchor: [20, 20], // Point of the icon which will correspond to marker's location
+        let ipfsFileHash;
+        try {
+            // Send the file to Pinata
+            const fileResponse = await fetch(pinFileUrl, {
+                method: 'POST',
+                headers: {
+                    pinata_api_key: 'bfdca2a32574aa901b98',  // Replace with your Pinata API Key
+                    pinata_secret_api_key: '85d4ad270d69bfb949784df759278e904abad0faaf8b7ba2cd337d8fb78af1e8' // Replace with your Pinata Secret Key
+                },
+                body: formData
             });
 
-            const carMarker = L.marker(start, { icon: carIcon }).addTo(routeMap);
-
-            const routingControl = L.Routing.control({
-                waypoints: [
-                    L.latLng(start[0], start[1]),
-                    L.latLng(end[0], end[1])
-                ],
-                routeWhileDragging: true,
-                createMarker: function() { return null; } // Disable markers
-            }).addTo(routeMap);
-
-            routingControl.on('routesfound', function(e) {
-                const routes = e.routes;
-                const route = routes[0];
-                const latLngs = route.coordinates;
-
-                animateCar(latLngs, carMarker);
-            });
-        }
-
-        // Function to animate the car along the route
-        function animateCar(latLngs, marker) {
-            let index = 0;
-            const speed = 200; // Speed of car movement in ms per step
-
-            function moveCar() {
-                if (index < latLngs.length) {
-                    const point = latLngs[index];
-                    marker.setLatLng([point.lat, point.lng]);
-                    index++;
-                    setTimeout(moveCar, speed);
-                }
+            if (!fileResponse.ok) {
+                throw new Error(`Failed to upload file to Pinata: ${fileResponse.statusText}`);
             }
 
-            moveCar(); // Start moving the car
+            const fileData = await fileResponse.json();
+            ipfsFileHash = fileData.IpfsHash; // Get the IPFS hash of the file
+            console.log("File uploaded to IPFS:", ipfsFileHash);
+
+        } catch (error) {
+            console.error("Error uploading file to Pinata:", error);
+            alert("Error uploading file to Pinata. Please try again.");
+            return;
         }
+
+        // Now upload the form metadata (as JSON)
+        const metadata = {
+            name: name,
+            location: location,
+            requestType: requestType,
+            walletAddress: walletAddress,
+            fileIpfsHash: ipfsFileHash // Link the file uploaded above
+        };
+
+        const pinJSONUrl = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+
+        let ipfsMetadataHash;
+        try {
+            // Send the metadata to Pinata
+            const metadataResponse = await fetch(pinJSONUrl, {
+                method: 'POST',
+                headers: {
+                    pinata_api_key: 'bfdca2a32574aa901b98',  // Replace with your Pinata API Key
+                    pinata_secret_api_key: '85d4ad270d69bfb949784df759278e904abad0faaf8b7ba2cd337d8fb78af1e8', // Replace with your Pinata Secret Key
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: `${name}'s Request Metadata`,
+                    keyvalues: metadata
+                })
+            });
+
+            if (!metadataResponse.ok) {
+                throw new Error(`Failed to upload metadata to Pinata: ${metadataResponse.statusText}`);
+            }
+
+            const metadataData = await metadataResponse.json();
+            ipfsMetadataHash = metadataData.IpfsHash;
+            console.log("Metadata uploaded to IPFS:", ipfsMetadataHash);
+
+            // Store the IPFS hash and form data in localStorage
+            const requests = JSON.parse(localStorage.getItem('requests')) || [];
+            requests.push({
+                ipfsFileHash,
+                ipfsMetadataHash,
+                name: name,
+                location: location,
+                requestType: requestType,
+                walletAddress: walletAddress
+            });
+            localStorage.setItem('requests', JSON.stringify(requests));
+
+            // Clear the form fields
+            document.getElementById('requestForm').reset();
+
+            // Display success window with tick mark and hash
+            showSuccessModal(ipfsMetadataHash);
+
+        } catch (error) {
+            console.error("Error uploading metadata to Pinata:", error);
+            alert("Error uploading form metadata to Pinata. Please try again.");
+        }
+    });
+
+    // Function to display the success modal
+    function showSuccessModal(ipfsHash) {
+        // Create modal content dynamically
+        const modalContent = `
+            <div class="modal-overlay">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <svg width="100" height="100" viewBox="0 0 16 16" class="bi bi-check-circle-fill text-success mb-3" xmlns="http://www.w3.org/2000/svg" fill="green">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.857 11.243 4.105 8.49a.563.563 0 1 0-.796.796l3 3a.563.563 0 0 0 .796 0l6-6a.563.563 0 1 0-.796-.796L6.857 11.243z"/>
+                            </svg>
+                            <h3 class="mb-3">Form Submitted Successfully!</h3>
+                            <p><strong>IPFS Metadata Hash:</strong> ${ipfsHash}</p>
+                            <button id="goToMapMitraBtn" class="btn btn-primary mt-3">Go to MapMitra</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Append modal to body
+        document.body.insertAdjacentHTML('beforeend', modalContent);
+
+        // Add event listener for the "Go to MapMitra" button
+        document.getElementById('goToMapMitraBtn').addEventListener('click', function () {
+            window.location.href = 'index2.html';
+        });
+    }
+
+    // Initial display of stored requests
+    async function displayRequests() {
+        const requests = JSON.parse(localStorage.getItem('requests')) || [];
+        
+        const requestList = document.getElementById('requestList');
+        requestList.innerHTML = ''; // Clear the list before re-rendering
+
+        for (const request of requests) {
+            let content = '';
+
+            // Retrieve the file from IPFS using the stored hash
+            try {
+                if (request.ipfsFileHash) {
+                    const fileResponse = await fetch(`https://gateway.pinata.cloud/ipfs/${request.ipfsFileHash}`);
+                    
+                    // If it's an image or file, handle it accordingly
+                    const contentType = fileResponse.headers.get("content-type");
+
+                    if (contentType.startsWith("image/")) {
+                        // Display image if it's an image
+                        content = `<img src="https://gateway.pinata.cloud/ipfs/${request.ipfsFileHash}" alt="${request.name}'s file" class="img-fluid mb-3" />`;
+                    }
+
+                    // Retrieve metadata for additional form details
+                    if (request.ipfsMetadataHash) {
+                        const metadataResponse = await fetch(`https://gateway.pinata.cloud/ipfs/${request.ipfsMetadataHash}`);
+                        const metadata = await metadataResponse.json();
+                        content += `
+                            <p><strong>Name:</strong> ${metadata.name}</p>
+                            <p><strong>Location:</strong> ${metadata.location}</p>
+                            <p><strong>Request Type:</strong> ${metadata.requestType}</p>
+                            <p><strong>Wallet Address:</strong> ${metadata.walletAddress}</p>
+                        `;
+                    }
+
+                    // Display the request details
+                    const requestCard = document.createElement('div');
+                    requestCard.classList.add('request-card', 'mb-3', 'shadow-sm');
+                    requestCard.innerHTML = `
+                        <h4>${request.name} from ${request.location} wants ${request.requestType}</h4>
+                        <p><strong>Wallet Address: ${request.walletAddress}</strong></p>
+                        <p><strong>IPFS Hash:</strong> ${request.ipfsFileHash}</p>
+                        ${content} <!-- Display content (image or text) -->
+                        <button class="delete-btn btn btn-danger" data-index="${requests.indexOf(request)}">Delete</button>
+                    `;
+                    requestList.appendChild(requestCard);
+                }
+            } catch (error) {
+                console.error("Error fetching from IPFS:", error);
+            }
+        }
+
+        // Attach delete event listeners
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const index = this.getAttribute('data-index');
+                deleteRequest(index);
+            });
+        });
+    }
+
+    // Function to delete a request
+    function deleteRequest(index) {
+        const requests = JSON.parse(localStorage.getItem('requests')) || [];
+        requests.splice(index, 1); // Remove the request at the specified index
+        localStorage.setItem('requests', JSON.stringify(requests)); // Update localStorage
+        displayRequests(); // Re-display the requests
+    }
+
+    // Initial display of stored requests
+    displayRequests();
+});
+
     </script>
 </body>
 </html>
