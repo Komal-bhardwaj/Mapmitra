@@ -33,6 +33,9 @@ MapMitra is an AI-powered platform designed to help donors easily connect with n
 
 ---
 
+## Deployment
+- You can see the site: [MapMitra](https://komal-bhardwaj.github.io/Mapmitra/)
+
 ## Core Features
 
 - **Geolocation Services**: Displays nearby NGOs based on the donor’s location using Google Maps API.
