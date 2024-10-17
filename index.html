@@ -11,7 +11,7 @@
 
 
 <style>
-/* General Styles */
+
 body {
     background-color:rgb(227, 242, 251);
     font-family: 'Arial', sans-serif;
@@ -42,7 +42,7 @@ footer {
     margin-top: 40px;
 }
 
-/* Form Styles */
+
 form {
     background-color: white;
     border: 1px solid #ddd;
@@ -71,7 +71,7 @@ select.form-select {
     font-size: 1rem;
 }
 
-/* Form Validation */
+
 input:invalid, select:invalid {
     border-color: red;
 }
@@ -80,7 +80,7 @@ input:valid, select:valid {
     border-color: #28a745;
 }
 
-/* Card Style for Displaying Reviews/Requests */
+
 .review-card, .request-card {
     background-color: white;
     border-radius: 8px;
@@ -116,7 +116,6 @@ input:valid, select:valid {
     background-color: #c82333;
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
     .container {
         margin-top: 20px;
@@ -241,7 +240,7 @@ input:valid, select:valid {
 
         let ipfsFileHash;
         try {
-            // Send the file to Pinata
+          
             const fileResponse = await fetch(pinFileUrl, {
                 method: 'POST',
                 headers: {
@@ -256,7 +255,7 @@ input:valid, select:valid {
             }
 
             const fileData = await fileResponse.json();
-            ipfsFileHash = fileData.IpfsHash; // Get the IPFS hash of the file
+            ipfsFileHash = fileData.IpfsHash; 
             console.log("File uploaded to IPFS:", ipfsFileHash);
 
         } catch (error) {
@@ -265,25 +264,25 @@ input:valid, select:valid {
             return;
         }
 
-        // Now upload the form metadata (as JSON)
+      
         const metadata = {
             name: name,
             location: location,
             requestType: requestType,
             walletAddress: walletAddress,
-            fileIpfsHash: ipfsFileHash // Link the file uploaded above
+            fileIpfsHash: ipfsFileHash 
         };
 
         const pinJSONUrl = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
 
         let ipfsMetadataHash;
         try {
-            // Send the metadata to Pinata
+           
             const metadataResponse = await fetch(pinJSONUrl, {
                 method: 'POST',
                 headers: {
-                    pinata_api_key: 'bfdca2a32574aa901b98',  // Replace with your Pinata API Key
-                    pinata_secret_api_key: '85d4ad270d69bfb949784df759278e904abad0faaf8b7ba2cd337d8fb78af1e8', // Replace with your Pinata Secret Key
+                    pinata_api_key: 'bfdca2a32574aa901b98',  
+                    pinata_secret_api_key: '85d4ad270d69bfb949784df759278e904abad0faaf8b7ba2cd337d8fb78af1e8', 
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -300,7 +299,7 @@ input:valid, select:valid {
             ipfsMetadataHash = metadataData.IpfsHash;
             console.log("Metadata uploaded to IPFS:", ipfsMetadataHash);
 
-            // Store the IPFS hash and form data in localStorage
+          
             const requests = JSON.parse(localStorage.getItem('requests')) || [];
             requests.push({
                 ipfsFileHash,
@@ -312,10 +311,10 @@ input:valid, select:valid {
             });
             localStorage.setItem('requests', JSON.stringify(requests));
 
-            // Clear the form fields
+         
             document.getElementById('requestForm').reset();
 
-            // Display success window with tick mark and hash
+       
             showSuccessModal(ipfsMetadataHash);
 
         } catch (error) {
@@ -324,9 +323,9 @@ input:valid, select:valid {
         }
     });
 
-    // Function to display the success modal
+  
     function showSuccessModal(ipfsHash) {
-        // Create modal content dynamically
+      
         const modalContent = `
             <div class="modal-overlay">
                 <div class="modal-content">
@@ -344,39 +343,39 @@ input:valid, select:valid {
             </div>
         `;
 
-        // Append modal to body
+     
         document.body.insertAdjacentHTML('beforeend', modalContent);
 
-        // Add event listener for the "Go to MapMitra" button
+       
         document.getElementById('goToMapMitraBtn').addEventListener('click', function () {
             window.location.href = 'index2.html';
         });
     }
 
-    // Initial display of stored requests
+  
     async function displayRequests() {
         const requests = JSON.parse(localStorage.getItem('requests')) || [];
         
         const requestList = document.getElementById('requestList');
-        requestList.innerHTML = ''; // Clear the list before re-rendering
+        requestList.innerHTML = ''; 
 
         for (const request of requests) {
             let content = '';
 
-            // Retrieve the file from IPFS using the stored hash
+          
             try {
                 if (request.ipfsFileHash) {
                     const fileResponse = await fetch(`https://gateway.pinata.cloud/ipfs/${request.ipfsFileHash}`);
                     
-                    // If it's an image or file, handle it accordingly
+                  
                     const contentType = fileResponse.headers.get("content-type");
 
                     if (contentType.startsWith("image/")) {
-                        // Display image if it's an image
+                      
                         content = `<img src="https://gateway.pinata.cloud/ipfs/${request.ipfsFileHash}" alt="${request.name}'s file" class="img-fluid mb-3" />`;
                     }
 
-                    // Retrieve metadata for additional form details
+               
                     if (request.ipfsMetadataHash) {
                         const metadataResponse = await fetch(`https://gateway.pinata.cloud/ipfs/${request.ipfsMetadataHash}`);
                         const metadata = await metadataResponse.json();
@@ -388,7 +387,7 @@ input:valid, select:valid {
                         `;
                     }
 
-                    // Display the request details
+                    
                     const requestCard = document.createElement('div');
                     requestCard.classList.add('request-card', 'mb-3', 'shadow-sm');
                     requestCard.innerHTML = `
@@ -405,7 +404,7 @@ input:valid, select:valid {
             }
         }
 
-        // Attach delete event listeners
+     
         const deleteButtons = document.querySelectorAll('.delete-btn');
         deleteButtons.forEach(button => {
             button.addEventListener('click', function () {
@@ -415,15 +414,14 @@ input:valid, select:valid {
         });
     }
 
-    // Function to delete a request
+
     function deleteRequest(index) {
         const requests = JSON.parse(localStorage.getItem('requests')) || [];
-        requests.splice(index, 1); // Remove the request at the specified index
-        localStorage.setItem('requests', JSON.stringify(requests)); // Update localStorage
-        displayRequests(); // Re-display the requests
+        requests.splice(index, 1); 
+        localStorage.setItem('requests', JSON.stringify(requests)); 
+        displayRequests(); 
     }
 
-    // Initial display of stored requests
     displayRequests();
 });
 
